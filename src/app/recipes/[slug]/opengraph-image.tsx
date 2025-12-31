@@ -23,10 +23,10 @@ export default async function Image({ params }: { params: { slug: string } }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#FAF6F1",
+            backgroundColor: "#2D2D2D",
           }}
         >
-          <div style={{ fontSize: 48, color: "#2D2D2D" }}>Recipe Not Found</div>
+          <div style={{ fontSize: 48, color: "white" }}>Recipe Not Found</div>
         </div>
       ),
       { ...size }
@@ -49,17 +49,60 @@ export default async function Image({ params }: { params: { slug: string } }) {
           height: "100%",
           width: "100%",
           display: "flex",
-          backgroundColor: "#FAF6F1",
+          backgroundColor: "#2D2D2D",
         }}
       >
-        {/* Left side - Recipe Info */}
+        {/* Left side - Recipe thumbnail */}
+        <div
+          style={{
+            display: "flex",
+            width: "50%",
+            height: "100%",
+            position: "relative",
+          }}
+        >
+          <img
+            src={recipe.thumbnailUrl}
+            alt={recipe.title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+          {/* Right gradient overlay */}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: "150px",
+              background: "linear-gradient(to right, transparent, #2D2D2D)",
+            }}
+          />
+          {/* Bottom gradient */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: "100px",
+              background: "linear-gradient(to top, #2D2D2D 20%, transparent)",
+            }}
+          />
+        </div>
+
+        {/* Right side - Recipe Info */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            width: "50%",
             padding: "60px",
-            width: "55%",
+            paddingLeft: "40px",
           }}
         >
           {/* Badges */}
@@ -76,8 +119,8 @@ export default async function Image({ params }: { params: { slug: string } }) {
                 alignItems: "center",
                 backgroundColor: difficultyStyle.bg,
                 color: difficultyStyle.text,
-                padding: "8px 16px",
-                borderRadius: "20px",
+                padding: "10px 20px",
+                borderRadius: "25px",
                 fontSize: 16,
                 fontWeight: 600,
               }}
@@ -88,11 +131,13 @@ export default async function Image({ params }: { params: { slug: string } }) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                backgroundColor: "#E8E2D9",
-                color: "#5C5C5C",
-                padding: "8px 16px",
-                borderRadius: "20px",
+                backgroundColor: "rgba(255,255,255,0.15)",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "25px",
                 fontSize: 16,
+                fontWeight: 600,
+                border: "1px solid rgba(255,255,255,0.3)",
               }}
             >
               {recipe.enhancedRecipe.totalTime}
@@ -103,9 +148,9 @@ export default async function Image({ params }: { params: { slug: string } }) {
           <div
             style={{
               display: "flex",
-              fontSize: 48,
+              fontSize: 44,
               fontWeight: "bold",
-              color: "#2D2D2D",
+              color: "white",
               lineHeight: 1.2,
               marginBottom: "20px",
             }}
@@ -117,14 +162,14 @@ export default async function Image({ params }: { params: { slug: string } }) {
           <div
             style={{
               display: "flex",
-              fontSize: 22,
-              color: "#5C5C5C",
-              lineHeight: 1.4,
+              fontSize: 20,
+              color: "rgba(250,246,241,0.8)",
+              lineHeight: 1.5,
               marginBottom: "32px",
             }}
           >
-            {recipe.description.length > 120
-              ? recipe.description.substring(0, 120) + "..."
+            {recipe.description.length > 100
+              ? recipe.description.substring(0, 100) + "..."
               : recipe.description}
           </div>
 
@@ -138,71 +183,70 @@ export default async function Image({ params }: { params: { slug: string } }) {
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "40px",
+                width: "3px",
                 height: "40px",
                 backgroundColor: "#C4704F",
-                borderRadius: "50%",
+                borderRadius: "2px",
               }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
-                <line x1="6" y1="17" x2="18" y2="17" />
-              </svg>
-            </div>
+            />
             <div
               style={{
                 display: "flex",
-                fontSize: 20,
-                color: "#5C5C5C",
+                flexDirection: "column",
               }}
             >
-              I Have Food at Home
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "28px",
+                    height: "28px",
+                    backgroundColor: "#C4704F",
+                    borderRadius: "50%",
+                  }}
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+                    <line x1="6" y1="17" x2="18" y2="17" />
+                  </svg>
+                </div>
+                <span
+                  style={{
+                    fontSize: 16,
+                    color: "rgba(250,246,241,0.7)",
+                  }}
+                >
+                  I Have Food at Home
+                </span>
+              </div>
+              <span
+                style={{
+                  fontSize: 14,
+                  color: "rgba(250,246,241,0.4)",
+                  marginLeft: "36px",
+                }}
+              >
+                by Lan
+              </span>
             </div>
           </div>
-        </div>
-
-        {/* Right side - Thumbnail */}
-        <div
-          style={{
-            display: "flex",
-            width: "45%",
-            position: "relative",
-          }}
-        >
-          {/* Thumbnail image */}
-          <img
-            src={recipe.thumbnailUrl}
-            alt={recipe.title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          {/* Overlay gradient */}
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              bottom: 0,
-              width: "80px",
-              background:
-                "linear-gradient(to right, #FAF6F1 0%, transparent 100%)",
-            }}
-          />
         </div>
       </div>
     ),
