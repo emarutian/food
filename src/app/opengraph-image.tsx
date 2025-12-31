@@ -17,42 +17,80 @@ export default async function Image() {
           height: "100%",
           width: "100%",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#FAF6F1",
-          backgroundImage:
-            "radial-gradient(circle at 25px 25px, #E8E2D9 2%, transparent 0%), radial-gradient(circle at 75px 75px, #E8E2D9 2%, transparent 0%)",
-          backgroundSize: "100px 100px",
+          backgroundColor: "#2D2D2D",
         }}
       >
-        {/* Content Container */}
+        {/* Left side - Food image collage */}
+        <div
+          style={{
+            display: "flex",
+            width: "50%",
+            height: "100%",
+            position: "relative",
+          }}
+        >
+          {/* Main food image */}
+          <img
+            src="https://i.ytimg.com/vi/IrlzlhQfHvo/maxresdefault.jpg"
+            alt="Korean Short Ribs"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+          {/* Gradient overlay */}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: "150px",
+              background: "linear-gradient(to right, transparent, #2D2D2D)",
+            }}
+          />
+          {/* Bottom gradient */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: "100px",
+              background: "linear-gradient(to top, #2D2D2D 20%, transparent)",
+            }}
+          />
+        </div>
+
+        {/* Right side - Content */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            padding: "40px 80px",
-            maxWidth: "1000px",
+            width: "50%",
+            padding: "60px",
+            paddingLeft: "40px",
           }}
         >
-          {/* Chef Hat Icon */}
+          {/* Chef Hat Icon with glow */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "80px",
-              height: "80px",
+              width: "70px",
+              height: "70px",
               backgroundColor: "#C4704F",
               borderRadius: "50%",
               marginBottom: "24px",
+              boxShadow: "0 0 40px rgba(196, 112, 79, 0.4)",
             }}
           >
             <svg
-              width="48"
-              height="48"
+              width="40"
+              height="40"
               viewBox="0 0 24 24"
               fill="none"
               stroke="white"
@@ -69,95 +107,137 @@ export default async function Image() {
           <div
             style={{
               display: "flex",
-              fontSize: 64,
-              fontWeight: "bold",
-              color: "#2D2D2D",
-              textAlign: "center",
-              marginBottom: "16px",
-              lineHeight: 1.1,
+              flexDirection: "column",
+              marginBottom: "20px",
             }}
           >
-            I Have Food at Home
+            <span
+              style={{
+                fontSize: 52,
+                fontWeight: "bold",
+                color: "white",
+                lineHeight: 1.1,
+              }}
+            >
+              I Have Food
+            </span>
+            <span
+              style={{
+                fontSize: 52,
+                fontWeight: "bold",
+                color: "#C4704F",
+                lineHeight: 1.1,
+              }}
+            >
+              at Home
+            </span>
           </div>
 
           {/* Tagline */}
           <div
             style={{
               display: "flex",
-              fontSize: 28,
-              color: "#C4704F",
-              textAlign: "center",
-              marginBottom: "32px",
-              fontStyle: "italic",
+              fontSize: 24,
+              color: "#FAF6F1",
+              marginBottom: "28px",
+              opacity: 0.9,
             }}
           >
             Simple Recipes for Busy Parents
           </div>
 
-          {/* Description */}
+          {/* Badges */}
           <div
             style={{
               display: "flex",
-              fontSize: 22,
-              color: "#5C5C5C",
-              textAlign: "center",
-              maxWidth: "700px",
-              lineHeight: 1.4,
-            }}
-          >
-            Healthy, budget-friendly meals inspired by French & Vietnamese
-            cooking. Turn mealtime chaos into joyful moments.
-          </div>
-
-          {/* Decorative Elements */}
-          <div
-            style={{
-              display: "flex",
-              gap: "16px",
-              marginTop: "40px",
+              gap: "12px",
+              flexWrap: "wrap",
             }}
           >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
                 backgroundColor: "#7B9E7B",
                 color: "white",
-                padding: "8px 20px",
-                borderRadius: "20px",
-                fontSize: 18,
+                padding: "10px 20px",
+                borderRadius: "25px",
+                fontSize: 16,
+                fontWeight: 600,
               }}
             >
-              Simple
+              Quick & Simple
             </div>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
                 backgroundColor: "#E5A94E",
                 color: "#2D2D2D",
-                padding: "8px 20px",
-                borderRadius: "20px",
-                fontSize: 18,
+                padding: "10px 20px",
+                borderRadius: "25px",
+                fontSize: 16,
+                fontWeight: 600,
               }}
             >
-              Healthy
+              Kid-Approved
             </div>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
-                backgroundColor: "#C4704F",
+                backgroundColor: "rgba(255,255,255,0.15)",
                 color: "white",
-                padding: "8px 20px",
-                borderRadius: "20px",
-                fontSize: 18,
+                padding: "10px 20px",
+                borderRadius: "25px",
+                fontSize: 16,
+                fontWeight: 600,
+                border: "1px solid rgba(255,255,255,0.3)",
               }}
             >
               Budget-Friendly
+            </div>
+          </div>
+
+          {/* Author line */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "32px",
+              gap: "12px",
+            }}
+          >
+            <div
+              style={{
+                width: "3px",
+                height: "40px",
+                backgroundColor: "#C4704F",
+                borderRadius: "2px",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 16,
+                  color: "rgba(250,246,241,0.6)",
+                }}
+              >
+                by Lan
+              </span>
+              <span
+                style={{
+                  fontSize: 14,
+                  color: "rgba(250,246,241,0.4)",
+                }}
+              >
+                French & Vietnamese Inspired
+              </span>
             </div>
           </div>
         </div>
