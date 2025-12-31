@@ -11,12 +11,12 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <ChefHat className="h-8 w-8 text-terracotta" />
               <span className="font-heading text-xl font-semibold">
-                From Scratch Kitchen
+                I Have Food at Home
               </span>
             </Link>
             <p className="text-parchment/70 max-w-md">
-              Homemade recipes with love, auto-generated from our favorite cooking videos.
-              Learn to cook like a pro with step-by-step instructions and helpful tips.
+              Simple, healthy, budget-friendly recipes for busy parents.
+              Turn mealtime chaos into joyful moments around the table.
             </p>
           </div>
 
@@ -31,13 +31,18 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/about" className="text-parchment/70 hover:text-terracotta transition-colors">
-                  About Us
+                  About Lan
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="text-parchment/70 hover:text-terracotta transition-colors">
-                  Admin
-                </Link>
+                <a
+                  href="https://www.youtube.com/@Ihavefoodathome"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-parchment/70 hover:text-terracotta transition-colors"
+                >
+                  YouTube Channel
+                </a>
               </li>
             </ul>
           </div>
@@ -47,7 +52,7 @@ export function Footer() {
             <h3 className="font-heading text-lg font-semibold mb-4">Connect</h3>
             <div className="flex gap-4">
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@Ihavefoodathome"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-parchment/10 rounded-lg hover:bg-terracotta transition-colors"
@@ -65,7 +70,7 @@ export function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="mailto:hello@fromscratchkitchen.com"
+                href="mailto:hello@ihavefoodathome.com"
                 className="p-2 bg-parchment/10 rounded-lg hover:bg-terracotta transition-colors"
                 aria-label="Email"
               >
@@ -77,10 +82,10 @@ export function Footer() {
 
         <div className="border-t border-parchment/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-parchment/50 text-sm">
-            © {new Date().getFullYear()} From Scratch Kitchen. Made with love.
+            © {new Date().getFullYear()} I Have Food at Home. Made with love by Lan.
           </p>
           <p className="font-accent text-lg text-terracotta">
-            Cook with passion, eat with joy
+            Turning mealtime chaos into joy
           </p>
         </div>
       </div>

@@ -95,7 +95,7 @@ export function CommentSection({ comments, recipeId }: CommentSectionProps) {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-terracotta">Chef Sarah</span>
+                        <span className="font-medium text-terracotta">Lan</span>
                         <span className="text-xs bg-terracotta/10 text-terracotta px-2 py-0.5 rounded">
                           Admin
                         </span>

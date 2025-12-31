@@ -22,10 +22,36 @@ const caveat = Caveat({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ihavefoodathome.com";
+
 export const metadata: Metadata = {
-  title: "From Scratch Kitchen",
-  description: "Homemade recipes with love, auto-generated from our favorite cooking videos",
-  keywords: ["recipes", "cooking", "homemade", "kitchen", "food"],
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "I Have Food at Home | Simple Recipes for Busy Parents",
+    template: "%s | I Have Food at Home",
+  },
+  description: "Simple, healthy, budget-friendly recipes from Lan. Turn mealtime chaos into joyful moments—even for picky eaters. French & Vietnamese inspired cooking.",
+  keywords: ["recipes", "cooking", "family meals", "picky eaters", "kid-friendly", "French cooking", "Vietnamese food", "quick recipes"],
+  authors: [{ name: "Lan", url: "https://www.youtube.com/@Ihavefoodathome" }],
+  creator: "Lan",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: "I Have Food at Home",
+    title: "I Have Food at Home | Simple Recipes for Busy Parents",
+    description: "Simple, healthy, budget-friendly recipes from Lan. Turn mealtime chaos into joyful moments—even for picky eaters.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "I Have Food at Home | Simple Recipes for Busy Parents",
+    description: "Simple, healthy, budget-friendly recipes from Lan. Turn mealtime chaos into joyful moments—even for picky eaters.",
+    creator: "@Ihavefoodathome",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

@@ -325,8 +325,8 @@ export const mockUser: User = {
 
 export const mockAdmin: User = {
   id: "admin-user",
-  email: "admin@fromscratchkitchen.com",
-  name: "I Have Food at Home",
+  email: "lan@ihavefoodathome.com",
+  name: "Lan",
   image: null,
   isAdmin: true,
   createdAt: new Date()

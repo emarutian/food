@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ChefHat, Heart, Sparkles, Youtube, ArrowRight } from "lucide-react";
+import { ChefHat, Heart, Globe, Users, Clock, Leaf, PiggyBank, Youtube, ArrowRight, GraduationCap } from "lucide-react";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 
 export default function AboutPage() {
@@ -9,123 +8,33 @@ export default function AboutPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="font-accent text-xl text-terracotta mb-2">Our Story</p>
+          <p className="font-accent text-xl text-terracotta mb-2">Meet Lan</p>
           <h1 className="font-heading text-4xl lg:text-5xl font-bold text-charcoal">
-            About From Scratch Kitchen
+            I Have Food at Home
           </h1>
         </div>
 
         {/* Hero Image */}
         <div className="relative aspect-[21/9] rounded-2xl overflow-hidden mb-16">
           <img
-            src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80"
-            alt="Beautiful kitchen with fresh ingredients"
+            src="https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?w=1200&q=80"
+            alt="Family cooking together in kitchen"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" />
           <div className="absolute bottom-8 left-8 right-8">
             <p className="font-accent text-3xl text-white">
-              &ldquo;Cooking is love made visible&rdquo;
+              &ldquo;Turning mealtime chaos into joyful moments&rdquo;
             </p>
           </div>
         </div>
 
-        {/* Story Section */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
-              Why We Started
-            </h2>
-            <div className="space-y-4 text-charcoal-light">
-              <p>
-                From Scratch Kitchen was born from a simple frustration: watching amazing
-                cooking videos on YouTube, only to pause, rewind, and squint at the screen
-                trying to catch all the ingredients and steps.
-              </p>
-              <p>
-                We believed there had to be a better way. What if the best cooking videos
-                came with beautifully formatted recipes, complete with ingredients lists,
-                step-by-step instructions, and helpful tips?
-              </p>
-              <p>
-                So we built it. Using AI, we transform cooking videos into comprehensive
-                recipe pages that make following along a breeze.
-              </p>
-            </div>
-          </div>
-          <div>
-            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
-              Our Mission
-            </h2>
-            <div className="space-y-4 text-charcoal-light">
-              <p>
-                We want to make home cooking more accessible and enjoyable. Whether
-                you&apos;re a beginner learning to boil water or an experienced cook
-                exploring new cuisines, we&apos;re here to help.
-              </p>
-              <p>
-                Every recipe on our site is designed to be clear, comprehensive, and
-                achievable. No more hunting through video descriptions or taking notes
-                while you watch.
-              </p>
-              <p>
-                Just hit play, follow along, and create something delicious.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Features Grid */}
-        <div className="bg-parchment-dark rounded-2xl p-8 lg:p-12 mb-16">
-          <h2 className="font-heading text-2xl font-semibold text-charcoal text-center mb-8">
-            What Makes Us Different
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-14 h-14 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Youtube className="h-7 w-7 text-terracotta" />
-              </div>
-              <h3 className="font-heading text-lg font-semibold text-charcoal mb-2">
-                Video First
-              </h3>
-              <p className="text-charcoal-light text-sm">
-                Every recipe starts with a great cooking video. Watch, learn, and cook
-                along at your own pace.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-14 h-14 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles className="h-7 w-7 text-sage" />
-              </div>
-              <h3 className="font-heading text-lg font-semibold text-charcoal mb-2">
-                AI-Enhanced
-              </h3>
-              <p className="text-charcoal-light text-sm">
-                Our AI extracts and enhances recipes with detailed ingredients,
-                instructions, tips, and variations.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-14 h-14 bg-honey/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-7 w-7 text-honey-dark" />
-              </div>
-              <h3 className="font-heading text-lg font-semibold text-charcoal mb-2">
-                Made with Love
-              </h3>
-              <p className="text-charcoal-light text-sm">
-                We personally curate every recipe. No spam, no ads, just delicious
-                food made from scratch.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Meet the Chef */}
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
-          <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 border-4 border-terracotta">
+        {/* Meet Lan Section */}
+        <div className="flex flex-col md:flex-row items-start gap-8 mb-16">
+          <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 border-4 border-terracotta mx-auto md:mx-0">
             <img
-              src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&q=80"
-              alt="Chef Sarah"
+              src="/lan-picture.jpg"
+              alt="Lan - I Have Food at Home"
               className="w-full h-full object-cover"
             />
           </div>
@@ -135,30 +44,172 @@ export default function AboutPage() {
               <span className="text-sm text-terracotta font-medium">The Chef Behind It All</span>
             </div>
             <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
-              Hi, I&apos;m Sarah
+              Hi, I&apos;m Lan
             </h2>
             <p className="text-charcoal-light mb-4">
-              I&apos;ve spent over 15 years in professional kitchens, from fine dining in
-              Paris to street food stalls in Bangkok. Now I&apos;m on a mission to bring
-              that experience to your home kitchen.
+              Born and raised in France with Vietnamese roots. Before becoming a mom,
+              I worked in the corporate world and ran a dessert-focused catering business.
+              Along the way, I trained at <strong>Ecole Lenôtre</strong>, the <strong>Art Institute</strong>,
+              and the <strong>French Pastry School</strong>.
             </p>
-            <p className="text-charcoal-light">
-              I personally review every recipe on this site, add my own tips and
-              variations, and respond to your comments. This isn&apos;t just a recipe
-              database—it&apos;s a conversation about food.
+            <p className="text-charcoal-light mb-4">
+              Today, I teach elementary school children how to cook—and more importantly,
+              how to <em>enjoy</em> every kind of food.
+            </p>
+            <p className="text-charcoal-light font-medium">
+              My mission is to help busy parents turn mealtime chaos into joyful,
+              shared moments around the table.
             </p>
           </div>
         </div>
 
+        {/* Recipe Philosophy */}
+        <div className="bg-parchment-dark rounded-2xl p-8 lg:p-12 mb-16">
+          <h2 className="font-heading text-2xl font-semibold text-charcoal text-center mb-8">
+            My Recipes Are...
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-14 h-14 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Clock className="h-7 w-7 text-terracotta" />
+              </div>
+              <h3 className="font-heading text-lg font-semibold text-charcoal">
+                Simple
+              </h3>
+              <p className="text-charcoal-light text-sm mt-1">
+                Easy to follow, no fuss
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-14 h-14 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Leaf className="h-7 w-7 text-sage" />
+              </div>
+              <h3 className="font-heading text-lg font-semibold text-charcoal">
+                Healthy
+              </h3>
+              <p className="text-charcoal-light text-sm mt-1">
+                Nutritious & balanced
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-14 h-14 bg-honey/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <PiggyBank className="h-7 w-7 text-honey-dark" />
+              </div>
+              <h3 className="font-heading text-lg font-semibold text-charcoal">
+                Budget-Friendly
+              </h3>
+              <p className="text-charcoal-light text-sm mt-1">
+                Affordable ingredients
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-14 h-14 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Globe className="h-7 w-7 text-terracotta" />
+              </div>
+              <h3 className="font-heading text-lg font-semibold text-charcoal">
+                Globally Inspired
+              </h3>
+              <p className="text-charcoal-light text-sm mt-1">
+                French, Vietnamese & more
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Story Section */}
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <div>
+            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
+              For Picky Eaters
+            </h2>
+            <div className="space-y-4 text-charcoal-light">
+              <p>
+                Everyone—yes, even the pickiest eaters—will find something to love here.
+              </p>
+              <p>
+                With my culinary background and experience teaching toddlers, kids, and adults,
+                I share practical tips and techniques so you can cook quickly and confidently.
+              </p>
+              <p>
+                From batch cooking to smart freezing methods, I&apos;ll show you how to stay
+                organized and always ready for last-minute meals.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
+              My Background
+            </h2>
+            <div className="space-y-4 text-charcoal-light">
+              <div className="flex items-start gap-3">
+                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <p><strong>Ecole Lenôtre</strong> — French culinary excellence</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <p><strong>The Art Institute</strong> — Culinary arts training</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <p><strong>French Pastry School</strong> — Pastry & dessert expertise</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Users className="h-5 w-5 text-sage mt-1 flex-shrink-0" />
+                <p><strong>Dessert Catering Business</strong> — Owner & operator</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Heart className="h-5 w-5 text-honey-dark mt-1 flex-shrink-0" />
+                <p><strong>Elementary School</strong> — Teaching kids to cook & love food</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* YouTube Stats */}
+        <div className="bg-charcoal rounded-2xl p-8 lg:p-12 mb-16 text-center">
+          <a
+            href="https://www.youtube.com/@Ihavefoodathome"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mb-6 text-white hover:text-terracotta transition-colors"
+          >
+            <Youtube className="h-8 w-8" />
+            <span className="font-heading text-2xl font-semibold">@Ihavefoodathome</span>
+          </a>
+          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+            <div>
+              <p className="font-heading text-3xl font-bold text-terracotta">860+</p>
+              <p className="text-parchment/70 text-sm">Subscribers</p>
+            </div>
+            <div>
+              <p className="font-heading text-3xl font-bold text-terracotta">36</p>
+              <p className="text-parchment/70 text-sm">Videos</p>
+            </div>
+            <div>
+              <p className="font-heading text-3xl font-bold text-terracotta">59K+</p>
+              <p className="text-parchment/70 text-sm">Views</p>
+            </div>
+          </div>
+          <a
+            href="https://www.youtube.com/@Ihavefoodathome"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 bg-terracotta hover:bg-terracotta-dark text-white px-6 py-3 rounded-lg font-medium transition-colors"
+          >
+            <Youtube className="h-5 w-5" />
+            Subscribe on YouTube
+          </a>
+        </div>
+
         {/* Newsletter CTA */}
         <div className="bg-sage/10 rounded-2xl p-8 lg:p-12 text-center">
-          <p className="font-accent text-xl text-terracotta mb-2">Join the kitchen</p>
+          <p className="font-accent text-xl text-terracotta mb-2">Join the family</p>
           <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
             Never Miss a Recipe
           </h2>
           <p className="text-charcoal-light mb-8 max-w-md mx-auto">
-            Subscribe to our newsletter and get new recipes delivered straight to your
-            inbox. No spam, just delicious content.
+            Subscribe to get new recipes delivered straight to your inbox.
+            Simple, healthy, and kid-approved meals every week.
           </p>
           <div className="flex justify-center mb-6">
             <NewsletterForm />

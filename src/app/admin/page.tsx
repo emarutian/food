@@ -68,7 +68,7 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-2 text-sm text-charcoal-light">
             <ChefHat className="h-5 w-5 text-terracotta" />
-            <span>Chef Sarah</span>
+            <span>Lan</span>
           </div>
         </div>
 

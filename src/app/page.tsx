@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Play, BookOpen, Users } from "lucide-react";
+import { ArrowRight, Play, BookOpen, Users, Clock, Heart, Leaf } from "lucide-react";
 import { RecipeCard } from "@/components/ui/RecipeCard";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 import { mockRecipes } from "@/lib/mock-data";
 
 export default function HomePage() {
   const latestRecipes = mockRecipes.slice(0, 3);
-  const featuredRecipe = mockRecipes[4]; // Ramen as featured
+  const featuredRecipe = mockRecipes[0]; // Korean Short Ribs as featured
 
   return (
     <div className="min-h-screen">
@@ -17,16 +17,16 @@ export default function HomePage() {
             {/* Text Content */}
             <div>
               <p className="font-accent text-2xl text-terracotta mb-4">
-                Welcome to our kitchen
+                Hi, I&apos;m Lan
               </p>
               <h1 className="font-heading text-4xl lg:text-6xl font-bold text-charcoal leading-tight">
-                Cook with love,
+                I Have Food
                 <br />
-                <span className="text-terracotta">from scratch</span>
+                <span className="text-terracotta">at Home</span>
               </h1>
               <p className="mt-6 text-lg text-charcoal-light max-w-lg">
-                Discover authentic recipes auto-generated from our favorite cooking videos.
-                Each recipe comes with AI-enhanced instructions, tips, and variations.
+                Simple, healthy, budget-friendly recipes for busy parents.
+                Turn mealtime chaos into joyful moments around the table—even for the pickiest eaters.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
@@ -40,7 +40,7 @@ export default function HomePage() {
                   href="/about"
                   className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-white px-6 py-3 rounded-lg font-medium transition-colors"
                 >
-                  About Us
+                  Meet Lan
                 </Link>
               </div>
             </div>
@@ -98,21 +98,21 @@ export default function HomePage() {
               <div className="flex justify-center mb-2">
                 <BookOpen className="h-6 w-6 text-terracotta" />
               </div>
-              <p className="font-heading text-2xl font-bold text-white">{mockRecipes.length}+</p>
-              <p className="text-parchment/70 text-sm">Recipes</p>
+              <p className="font-heading text-2xl font-bold text-white">36+</p>
+              <p className="text-parchment/70 text-sm">Videos</p>
             </div>
             <div>
               <div className="flex justify-center mb-2">
                 <Play className="h-6 w-6 text-terracotta" />
               </div>
-              <p className="font-heading text-2xl font-bold text-white">100+</p>
-              <p className="text-parchment/70 text-sm">Videos</p>
+              <p className="font-heading text-2xl font-bold text-white">59K+</p>
+              <p className="text-parchment/70 text-sm">Views</p>
             </div>
             <div>
               <div className="flex justify-center mb-2">
                 <Users className="h-6 w-6 text-terracotta" />
               </div>
-              <p className="font-heading text-2xl font-bold text-white">5K+</p>
+              <p className="font-heading text-2xl font-bold text-white">860+</p>
               <p className="text-parchment/70 text-sm">Subscribers</p>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="font-accent text-xl text-terracotta mb-2">Fresh out of the oven</p>
+              <p className="font-accent text-xl text-terracotta mb-2">Fresh from my kitchen</p>
               <h2 className="font-heading text-3xl font-bold text-charcoal">
                 Latest Recipes
               </h2>
@@ -149,13 +149,13 @@ export default function HomePage() {
       <section className="py-16 lg:py-24 bg-sage/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="font-accent text-xl text-terracotta mb-2">Never miss a recipe</p>
+            <p className="font-accent text-xl text-terracotta mb-2">Join the family</p>
             <h2 className="font-heading text-3xl font-bold text-charcoal mb-4">
-              Subscribe to Our Newsletter
+              Never Miss a Recipe
             </h2>
             <p className="text-charcoal-light mb-8">
-              Get notified when we publish new recipes. No spam, just delicious content
-              delivered straight to your inbox.
+              Get simple, kid-approved recipes delivered straight to your inbox.
+              No spam—just delicious meals your whole family will love.
             </p>
             <div className="flex justify-center">
               <NewsletterForm />
@@ -164,51 +164,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Us Section */}
+      {/* Why Cook With Me Section */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="font-accent text-xl text-terracotta mb-2">Why cook with us?</p>
+            <p className="font-accent text-xl text-terracotta mb-2">Why cook with me?</p>
             <h2 className="font-heading text-3xl font-bold text-charcoal">
-              More Than Just Recipes
+              Recipes That Work for Real Life
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Play className="h-8 w-8 text-terracotta" />
+                <Clock className="h-8 w-8 text-terracotta" />
               </div>
               <h3 className="font-heading text-xl font-semibold text-charcoal mb-2">
-                Watch & Learn
+                Quick & Simple
               </h3>
               <p className="text-charcoal-light">
-                Every recipe comes with an embedded video, so you can watch and cook along
-                at your own pace.
+                Most recipes ready in under 30 minutes. Perfect for busy weeknights
+                when you need dinner on the table fast.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="h-8 w-8 text-sage" />
+                <Leaf className="h-8 w-8 text-sage" />
               </div>
               <h3 className="font-heading text-xl font-semibold text-charcoal mb-2">
-                AI-Enhanced
+                Healthy & Balanced
               </h3>
               <p className="text-charcoal-light">
-                Our AI extracts detailed ingredients, step-by-step instructions, pro tips,
-                and tasty variations.
+                Nutritious meals the whole family will enjoy. Inspired by French
+                and Vietnamese cooking traditions.
               </p>
             </div>
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-honey/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-honey-dark" />
+                <Heart className="h-8 w-8 text-honey-dark" />
               </div>
               <h3 className="font-heading text-xl font-semibold text-charcoal mb-2">
-                Community Driven
+                Picky Eater Approved
               </h3>
               <p className="text-charcoal-light">
-                Rate recipes, leave comments, and get direct replies from our kitchen
-                team.
+                Tested on real kids—including the pickiest ones. Tips and techniques
+                to help every child love food.
               </p>
             </div>
           </div>

@@ -15,7 +15,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-2 group">
             <ChefHat className="h-8 w-8 text-terracotta group-hover:text-terracotta-dark transition-colors" />
             <span className="font-heading text-xl font-semibold text-charcoal">
-              From Scratch Kitchen
+              I Have Food at Home
             </span>
           </Link>
 

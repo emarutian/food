@@ -1,11 +1,9 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Clock,
   ChefHat,
-  ThumbsUp,
-  ThumbsDown,
-  MessageCircle,
   ArrowLeft,
   Lightbulb,
   Utensils,
@@ -23,6 +21,37 @@ export async function generateStaticParams() {
   return mockRecipes.map((recipe) => ({
     slug: recipe.slug,
   }));
+}
+
+export async function generateMetadata({ params }: RecipePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const recipe = getRecipeBySlug(slug);
+
+  if (!recipe) {
+    return {
+      title: "Recipe Not Found",
+    };
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ihavefoodathome.com";
+
+  return {
+    title: recipe.title,
+    description: recipe.description,
+    openGraph: {
+      title: recipe.title,
+      description: recipe.description,
+      type: "article",
+      url: `${siteUrl}/recipes/${recipe.slug}`,
+      siteName: "I Have Food at Home",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: recipe.title,
+      description: recipe.description,
+      creator: "@Ihavefoodathome",
+    },
+  };
 }
 
 export default async function RecipePage({ params }: RecipePageProps) {
