@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  image     String?
+  isAdmin   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+
+  ratings     Rating[]
+  comments    Comment[]
+  subscriber  Subscriber?
+}
+
+model Recipe {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  title          String
+  description    String
+  youtubeUrl     String
+  youtubeId      String
+  thumbnailUrl   String
+  enhancedRecipe Json      // Stores ingredients, instructions, times, tips, variations
+  rating         Int       @default(0) // Percentage of positive ratings
+  ratingCount    Int       @default(0)
+  commentCount   Int       @default(0)
+  isPublished    Boolean   @default(false)
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  ratings   Rating[]
+  comments  Comment[]
+  emailLogs EmailLog[]
+}
+
+model Rating {
+  id        String   @id @default(cuid())
+  recipeId  String
+  userId    String
+  value     Int      // +1 or -1
+  createdAt DateTime @default(now())
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, userId]) // One rating per user per recipe
+}
+
+model Comment {
+  id           String    @id @default(cuid())
+  recipeId     String
+  userId       String
+  content      String
+  createdAt    DateTime  @default(now())
+  adminReply   String?
+  adminReplyAt DateTime?
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Subscriber {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String?
+  userId           String?   @unique
+  isActive         Boolean   @default(true)
+  unsubscribeToken String    @unique @default(cuid())
+  subscribedAt     DateTime  @default(now())
+  unsubscribedAt   DateTime?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model EmailLog {
+  id          String   @id @default(cuid())
+  recipeId    String
+  subject     String
+  sentCount   Int      @default(0)
+  failedCount Int      @default(0)
+  sentAt      DateTime @default(now())
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}

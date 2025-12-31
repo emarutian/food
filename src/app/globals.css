@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Custom Theme for From Scratch Kitchen */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors from requirements */
+  --color-terracotta: #D4694D;
+  --color-terracotta-dark: #B85A42;
+  --color-terracotta-light: #E8907A;
+  --color-sage: #5D7E5D;
+  --color-sage-dark: #4A654A;
+  --color-sage-light: #7A9B7A;
+  --color-parchment: #F9F6F0;
+  --color-parchment-dark: #EDE8DC;
+  --color-charcoal: #2D2D29;
+  --color-charcoal-light: #4A4A45;
+  --color-honey: #FBBF24;
+  --color-honey-dark: #D4A01D;
+
+  /* Background and foreground */
+  --color-background: var(--color-parchment);
+  --color-foreground: var(--color-charcoal);
+
+  /* Fonts */
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-source-sans);
+  --font-accent: var(--font-caveat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-parchment);
+  color: var(--color-charcoal);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Typography utilities */
+.font-heading {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+.font-accent {
+  font-family: var(--font-accent), cursive;
+}
+
+/* Custom scrollbar for the warm aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-parchment-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-terracotta);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terracotta-dark);
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-honey);
+  color: var(--color-charcoal);
 }
