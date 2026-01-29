@@ -74,3 +74,12 @@ export interface EmailLog {
   failedCount: number;
   sentAt: Date;
 }
+
+export interface YouTubeVideo {
+  id: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  publishedAt: Date;
+  videoUrl: string;
+}

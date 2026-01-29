@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Play, BookOpen, Users, Clock, Heart, Leaf } from "lucide-react";
 import { RecipeCard } from "@/components/ui/RecipeCard";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
+import { LatestVideos } from "@/components/sections/LatestVideos";
 import { mockRecipes } from "@/lib/mock-data";
 
 export default function HomePage() {
@@ -146,6 +147,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Latest YouTube Videos */}
+      <LatestVideos />
 
       {/* Newsletter Section */}
       <section className="py-12 sm:py-16 lg:py-24 bg-sage/10">
