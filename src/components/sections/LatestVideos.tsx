@@ -1,11 +1,12 @@
 import { ArrowRight, Youtube } from "lucide-react";
 import { VideoCard } from "@/components/ui/VideoCard";
 import { getLatestYouTubeVideos } from "@/lib/youtube";
+import { ExpandableVideoGrid } from "./ExpandableVideoGrid";
 
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@Ihavefoodathome";
 
 export async function LatestVideos() {
-  const videos = await getLatestYouTubeVideos(6);
+  const videos = await getLatestYouTubeVideos(15); // Fetch all available
 
   // Don't render section if no videos (e.g., channel ID not configured)
   if (videos.length === 0) {
@@ -36,11 +37,7 @@ export async function LatestVideos() {
           </a>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-        </div>
+        <ExpandableVideoGrid videos={videos} initialCount={6} />
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ interface VideoCardProps {
 
 export function VideoCard({ video }: VideoCardProps) {
   // Format the date nicely
-  const formattedDate = video.publishedAt.toLocaleDateString("en-US", {
+  const formattedDate = new Date(video.publishedAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",

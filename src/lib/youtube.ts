@@ -56,9 +56,9 @@ function parseYouTubeRSS(xml: string): YouTubeVideo[] {
     const titleMatch = entry.match(/<title>([^<]+)<\/title>/);
     const title = titleMatch ? decodeXMLEntities(titleMatch[1]) : "";
 
-    // Extract published date
+    // Extract published date (keep as ISO string for serialization)
     const publishedMatch = entry.match(/<published>([^<]+)<\/published>/);
-    const published = publishedMatch ? new Date(publishedMatch[1]) : new Date();
+    const published = publishedMatch ? publishedMatch[1] : new Date().toISOString();
 
     // Extract description from media:description
     const descMatch = entry.match(/<media:description>([^<]*)<\/media:description>/);

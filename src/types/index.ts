@@ -80,6 +80,6 @@ export interface YouTubeVideo {
   title: string;
   description: string;
   thumbnailUrl: string;
-  publishedAt: Date;
+  publishedAt: string; // ISO string for serialization
   videoUrl: string;
 }
