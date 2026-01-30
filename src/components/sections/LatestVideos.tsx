@@ -6,7 +6,7 @@ import { ExpandableVideoGrid } from "./ExpandableVideoGrid";
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@Ihavefoodathome";
 
 export async function LatestVideos() {
-  const videos = await getLatestYouTubeVideos(15); // Fetch all available
+  const videos = await getLatestYouTubeVideos(50); // Fetch up to 50 videos
 
   // Don't render section if no videos (e.g., channel ID not configured)
   if (videos.length === 0) {
