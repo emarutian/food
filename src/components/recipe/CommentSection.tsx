@@ -29,7 +29,7 @@ export function CommentSection({ comments, recipeId }: CommentSectionProps) {
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm">
       <h2 className="font-heading text-xl font-semibold text-charcoal mb-6 flex items-center gap-2">
-        <MessageCircle className="h-5 w-5 text-terracotta" />
+        <MessageCircle className="h-5 w-5 text-primary" />
         Comments ({comments.length})
       </h2>
 
@@ -45,13 +45,13 @@ export function CommentSection({ comments, recipeId }: CommentSectionProps) {
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Share your thoughts or ask a question..."
               rows={3}
-              className="w-full px-4 py-3 rounded-lg border border-parchment-dark bg-parchment focus:outline-none focus:ring-2 focus:ring-terracotta focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 rounded-lg border border-parchment-dark bg-parchment focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
             />
             <div className="mt-2 flex justify-end">
               <button
                 type="submit"
                 disabled={isSubmitting || !newComment.trim()}
-                className="bg-terracotta hover:bg-terracotta-dark disabled:bg-terracotta-light text-white px-4 py-2 rounded-lg font-medium transition-colors inline-flex items-center gap-2"
+                className="bg-primary hover:bg-primary-dark disabled:bg-primary-light text-white px-4 py-2 rounded-lg font-medium transition-colors inline-flex items-center gap-2"
               >
                 <Send className="h-4 w-4" />
                 {isSubmitting ? "Posting..." : "Post Comment"}
@@ -88,15 +88,15 @@ export function CommentSection({ comments, recipeId }: CommentSectionProps) {
 
               {/* Admin Reply */}
               {comment.adminReply && (
-                <div className="mt-4 ml-13 pl-6 border-l-2 border-terracotta">
+                <div className="mt-4 ml-13 pl-6 border-l-2 border-primary">
                   <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-terracotta flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                       <ChefHat className="h-4 w-4 text-white" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium text-terracotta">Lan</span>
-                        <span className="text-xs bg-terracotta/10 text-terracotta px-2 py-0.5 rounded">
+                        <span className="font-medium text-primary">Lan</span>
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
                           Admin
                         </span>
                         {comment.adminReplyAt && (

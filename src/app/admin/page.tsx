@@ -124,7 +124,7 @@ export default function AdminDashboard() {
               <ExternalLink className="h-3 w-3" />
             </Link>
             <div className="flex items-center gap-2 text-sm text-charcoal-light">
-              <ChefHat className="h-5 w-5 text-terracotta" />
+              <ChefHat className="h-5 w-5 text-primary" />
               <span>Admin</span>
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-2">
               <span className="text-charcoal-light text-sm">Total Recipes</span>
-              <BarChart3 className="h-5 w-5 text-terracotta" />
+              <BarChart3 className="h-5 w-5 text-primary" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
               {isLoading ? "..." : stats.totalRecipes}
@@ -162,7 +162,7 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-2">
               <span className="text-charcoal-light text-sm">Avg Rating</span>
-              <TrendingUp className="h-5 w-5 text-terracotta" />
+              <TrendingUp className="h-5 w-5 text-primary" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
               {isLoading ? "..." : `${stats.avgRating}%`}
@@ -214,7 +214,7 @@ export default function AdminDashboard() {
               <button
                 onClick={handleSyncVideos}
                 disabled={isSyncing}
-                className="w-full bg-terracotta hover:bg-terracotta-dark disabled:bg-terracotta-light text-white px-6 py-4 rounded-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
+                className="w-full bg-primary hover:bg-primary-dark disabled:bg-primary-light text-white px-6 py-4 rounded-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
               >
                 {isSyncing ? (
                   <>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
                   href="/keystatic/recipes"
                   className="flex items-center gap-3 p-4 bg-parchment rounded-lg hover:bg-parchment-dark transition-colors"
                 >
-                  <Settings className="h-6 w-6 text-terracotta" />
+                  <Settings className="h-6 w-6 text-primary" />
                   <div>
                     <p className="font-medium text-charcoal">Edit Recipes</p>
                     <p className="text-xs text-charcoal-light">
@@ -298,7 +298,7 @@ export default function AdminDashboard() {
                       href={`/recipes/${recipe.slug}`}
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-parchment transition-colors group"
                     >
-                      <span className="w-6 h-6 rounded-full bg-parchment-dark flex items-center justify-center text-sm font-medium text-charcoal-light group-hover:bg-terracotta group-hover:text-white transition-colors">
+                      <span className="w-6 h-6 rounded-full bg-parchment-dark flex items-center justify-center text-sm font-medium text-charcoal-light group-hover:bg-primary group-hover:text-white transition-colors">
                         {index + 1}
                       </span>
                       <div className="flex-1 min-w-0">
@@ -334,7 +334,7 @@ export default function AdminDashboard() {
                 </h2>
                 <Link
                   href="/keystatic/recipes"
-                  className="text-xs text-terracotta hover:text-terracotta-dark"
+                  className="text-xs text-primary hover:text-primary-dark"
                 >
                   Edit all →
                 </Link>

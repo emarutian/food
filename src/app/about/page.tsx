@@ -8,7 +8,7 @@ export default function AboutPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="font-accent text-xl text-terracotta mb-2">Meet Lan</p>
+          <p className="font-accent text-xl text-primary mb-2">Meet Lan</p>
           <h1 className="font-heading text-4xl lg:text-5xl font-bold text-charcoal">
             I Have Food at Home
           </h1>
@@ -31,7 +31,7 @@ export default function AboutPage() {
 
         {/* Meet Lan Section */}
         <div className="flex flex-col md:flex-row items-start gap-8 mb-16">
-          <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 border-4 border-terracotta mx-auto md:mx-0">
+          <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0 border-4 border-primary mx-auto md:mx-0">
             <img
               src="/lan-picture.jpg"
               alt="Lan - I Have Food at Home"
@@ -40,8 +40,8 @@ export default function AboutPage() {
           </div>
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <ChefHat className="h-5 w-5 text-terracotta" />
-              <span className="text-sm text-terracotta font-medium">The Chef Behind It All</span>
+              <ChefHat className="h-5 w-5 text-primary" />
+              <span className="text-sm text-primary font-medium">The Chef Behind It All</span>
             </div>
             <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
               Hi, I&apos;m Lan
@@ -70,8 +70,8 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="w-14 h-14 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="h-7 w-7 text-terracotta" />
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Clock className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-heading text-lg font-semibold text-charcoal">
                 Simple
@@ -103,8 +103,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="w-14 h-14 bg-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Globe className="h-7 w-7 text-terracotta" />
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Globe className="h-7 w-7 text-primary" />
               </div>
               <h3 className="font-heading text-lg font-semibold text-charcoal">
                 Globally Inspired
@@ -142,15 +142,15 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-4 text-charcoal-light">
               <div className="flex items-start gap-3">
-                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <GraduationCap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p><strong>Ecole Lenôtre</strong> — French culinary excellence</p>
               </div>
               <div className="flex items-start gap-3">
-                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <GraduationCap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p><strong>The Art Institute</strong> — Culinary arts training</p>
               </div>
               <div className="flex items-start gap-3">
-                <GraduationCap className="h-5 w-5 text-terracotta mt-1 flex-shrink-0" />
+                <GraduationCap className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p><strong>French Pastry School</strong> — Pastry & dessert expertise</p>
               </div>
               <div className="flex items-start gap-3">
@@ -171,22 +171,22 @@ export default function AboutPage() {
             href="https://www.youtube.com/@Ihavefoodathome"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mb-6 text-white hover:text-terracotta transition-colors"
+            className="inline-flex items-center gap-2 mb-6 text-white hover:text-primary transition-colors"
           >
             <Youtube className="h-8 w-8" />
             <span className="font-heading text-2xl font-semibold">@Ihavefoodathome</span>
           </a>
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
             <div>
-              <p className="font-heading text-3xl font-bold text-terracotta">860+</p>
+              <p className="font-heading text-3xl font-bold text-primary">860+</p>
               <p className="text-parchment/70 text-sm">Subscribers</p>
             </div>
             <div>
-              <p className="font-heading text-3xl font-bold text-terracotta">36</p>
+              <p className="font-heading text-3xl font-bold text-primary">36</p>
               <p className="text-parchment/70 text-sm">Videos</p>
             </div>
             <div>
-              <p className="font-heading text-3xl font-bold text-terracotta">59K+</p>
+              <p className="font-heading text-3xl font-bold text-primary">59K+</p>
               <p className="text-parchment/70 text-sm">Views</p>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function AboutPage() {
             href="https://www.youtube.com/@Ihavefoodathome"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 bg-terracotta hover:bg-terracotta-dark text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            className="mt-6 inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors"
           >
             <Youtube className="h-5 w-5" />
             Subscribe on YouTube
@@ -203,7 +203,7 @@ export default function AboutPage() {
 
         {/* Newsletter CTA */}
         <div className="bg-sage/10 rounded-2xl p-8 lg:p-12 text-center">
-          <p className="font-accent text-xl text-terracotta mb-2">Join the family</p>
+          <p className="font-accent text-xl text-primary mb-2">Join the family</p>
           <h2 className="font-heading text-2xl font-semibold text-charcoal mb-4">
             Never Miss a Recipe
           </h2>
@@ -216,7 +216,7 @@ export default function AboutPage() {
           </div>
           <Link
             href="/recipes"
-            className="text-terracotta font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
+            className="text-primary font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
           >
             Or start browsing recipes <ArrowRight className="h-4 w-4" />
           </Link>

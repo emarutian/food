@@ -30,14 +30,14 @@ export function NewsletterForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Your email address"
           required
-          className="w-full pl-10 pr-4 py-3 rounded-lg border border-parchment-dark bg-white focus:outline-none focus:ring-2 focus:ring-terracotta focus:border-transparent transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-lg border border-parchment-dark bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
           disabled={status === "loading" || status === "success"}
         />
       </div>
       <button
         type="submit"
         disabled={status === "loading" || status === "success"}
-        className="bg-terracotta hover:bg-terracotta-dark disabled:bg-terracotta-light text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 min-w-[140px]"
+        className="bg-primary hover:bg-primary-dark disabled:bg-primary-light text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 min-w-[140px]"
       >
         {status === "loading" && <Loader2 className="h-5 w-5 animate-spin" />}
         {status === "success" && <Check className="h-5 w-5" />}

@@ -11,7 +11,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const difficultyColors = {
     Easy: "bg-sage text-white",
     Medium: "bg-honey text-charcoal",
-    Hard: "bg-terracotta text-white",
+    Hard: "bg-primary text-white",
   };
 
   return (
@@ -38,7 +38,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-terracotta transition-colors line-clamp-2">
+          <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-primary transition-colors line-clamp-2">
             {recipe.title}
           </h3>
 

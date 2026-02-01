@@ -33,8 +33,8 @@ export function RatingButtons() {
         onClick={() => handleRate(-1)}
         className={`p-3 rounded-full transition-colors ${
           userRating === -1
-            ? "bg-terracotta text-white"
-            : "bg-parchment-dark text-charcoal hover:bg-terracotta hover:text-white"
+            ? "bg-primary text-white"
+            : "bg-parchment-dark text-charcoal hover:bg-primary hover:text-white"
         }`}
         aria-label="Dislike this recipe"
       >

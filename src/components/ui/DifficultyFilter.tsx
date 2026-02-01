@@ -8,7 +8,7 @@ interface DifficultyFilterProps {
 const difficulties = [
   { value: "Easy", color: "bg-sage hover:bg-sage-dark" },
   { value: "Medium", color: "bg-honey hover:bg-honey-dark" },
-  { value: "Hard", color: "bg-terracotta hover:bg-terracotta-dark" },
+  { value: "Hard", color: "bg-primary hover:bg-primary-dark" },
 ];
 
 export function DifficultyFilter({ selected, onSelect }: DifficultyFilterProps) {

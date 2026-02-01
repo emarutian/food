@@ -61,7 +61,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
   const difficultyColors = {
     Easy: "bg-sage text-white",
     Medium: "bg-honey text-charcoal",
-    Hard: "bg-terracotta text-white",
+    Hard: "bg-primary text-white",
   };
 
   return (
@@ -70,7 +70,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
         {/* Back Button */}
         <Link
           href="/recipes"
-          className="inline-flex items-center gap-2 text-charcoal-light hover:text-terracotta transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-charcoal-light hover:text-primary transition-colors mb-6"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Recipes
@@ -118,7 +118,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
             href={recipe.youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 text-sm text-charcoal-light hover:text-terracotta transition-colors"
+            className="mt-3 inline-flex items-center gap-2 text-sm text-charcoal-light hover:text-primary transition-colors"
           >
             <Youtube className="h-4 w-4" />
             Watch on YouTube
@@ -131,7 +131,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl p-6 shadow-sm sticky top-24">
               <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 flex items-center gap-2">
-                <Utensils className="h-5 w-5 text-terracotta" />
+                <Utensils className="h-5 w-5 text-primary" />
                 Ingredients
               </h2>
               <ul className="space-y-3">
@@ -140,7 +140,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
                     key={index}
                     className="flex items-start gap-3 text-charcoal"
                   >
-                    <span className="w-2 h-2 rounded-full bg-terracotta mt-2 flex-shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                     {ingredient}
                   </li>
                 ))}
@@ -158,7 +158,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
               <ol className="space-y-6">
                 {recipe.instructions.map((instruction, index) => (
                   <li key={index} className="flex gap-4">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-terracotta text-white font-semibold flex items-center justify-center">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white font-semibold flex items-center justify-center">
                       {index + 1}
                     </span>
                     <p className="text-charcoal pt-1">{instruction}</p>

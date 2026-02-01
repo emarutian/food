@@ -67,7 +67,7 @@ export function EditableRecipeContent({
           <div className="fixed bottom-6 right-6 z-50">
             <button
               onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2 bg-terracotta hover:bg-terracotta-dark text-white
+              className="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white
                          px-5 py-3 rounded-full shadow-lg transition-all hover:shadow-xl"
             >
               <Pencil className="h-5 w-5" />
@@ -80,7 +80,7 @@ export function EditableRecipeContent({
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl p-6 shadow-sm sticky top-24">
             <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 flex items-center gap-2">
-              <Utensils className="h-5 w-5 text-terracotta" />
+              <Utensils className="h-5 w-5 text-primary" />
               Ingredients
             </h2>
             <ul className="space-y-3">
@@ -89,7 +89,7 @@ export function EditableRecipeContent({
                   key={index}
                   className="flex items-start gap-3 text-charcoal"
                 >
-                  <span className="w-2 h-2 rounded-full bg-terracotta mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                   {ingredient}
                 </li>
               ))}
@@ -107,7 +107,7 @@ export function EditableRecipeContent({
             <ol className="space-y-6">
               {recipe.instructions.map((instruction, index) => (
                 <li key={index} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-terracotta text-white font-semibold flex items-center justify-center">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white font-semibold flex items-center justify-center">
                     {index + 1}
                   </span>
                   <p className="text-charcoal pt-1">{instruction}</p>
@@ -220,8 +220,8 @@ export function EditableRecipeContent({
 
       {/* Edit Mode Banner */}
       <div className="col-span-full mb-4">
-        <div className="bg-terracotta/10 border border-terracotta/20 rounded-xl p-4 flex items-center gap-3">
-          <Pencil className="h-5 w-5 text-terracotta" />
+        <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex items-center gap-3">
+          <Pencil className="h-5 w-5 text-primary" />
           <p className="text-charcoal">
             <span className="font-semibold">Edit Mode</span> — Make your changes
             and click Save when done.
@@ -233,7 +233,7 @@ export function EditableRecipeContent({
       <div className="lg:col-span-1">
         <div className="bg-white rounded-xl p-6 shadow-sm sticky top-24">
           <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 flex items-center gap-2">
-            <Utensils className="h-5 w-5 text-terracotta" />
+            <Utensils className="h-5 w-5 text-primary" />
             Ingredients
           </h2>
           <EditableList

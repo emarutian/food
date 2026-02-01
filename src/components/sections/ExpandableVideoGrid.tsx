@@ -28,7 +28,7 @@ export function ExpandableVideoGrid({ videos, initialCount }: ExpandableVideoGri
         <div className="mt-8 text-center">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-terracotta text-terracotta hover:bg-terracotta hover:text-white rounded-lg font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-lg font-medium transition-colors"
           >
             {expanded ? (
               <>

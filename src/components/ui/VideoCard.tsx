@@ -33,7 +33,7 @@ export function VideoCard({ video }: VideoCardProps) {
           />
           {/* Play button overlay */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="bg-terracotta/90 rounded-full p-3 shadow-lg">
+            <div className="bg-primary/90 rounded-full p-3 shadow-lg">
               <Play className="h-6 w-6 text-white fill-white" />
             </div>
           </div>
@@ -45,7 +45,7 @@ export function VideoCard({ video }: VideoCardProps) {
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-terracotta transition-colors line-clamp-2">
+          <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-primary transition-colors line-clamp-2">
             {video.title}
           </h3>
 
@@ -58,7 +58,7 @@ export function VideoCard({ video }: VideoCardProps) {
           {/* Meta */}
           <div className="mt-4 flex items-center justify-between text-sm text-charcoal-light">
             <span>{formattedDate}</span>
-            <span className="flex items-center gap-1 text-terracotta font-medium">
+            <span className="flex items-center gap-1 text-primary font-medium">
               <Play className="h-4 w-4" />
               Watch
             </span>

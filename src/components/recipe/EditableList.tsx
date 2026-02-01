@@ -74,11 +74,11 @@ export function EditableList({
 
           {/* Number or bullet */}
           {numbered ? (
-            <span className="flex-shrink-0 w-7 h-7 mt-2 rounded-full bg-terracotta text-white text-sm font-semibold flex items-center justify-center">
+            <span className="flex-shrink-0 w-7 h-7 mt-2 rounded-full bg-primary text-white text-sm font-semibold flex items-center justify-center">
               {index + 1}
             </span>
           ) : (
-            <span className="w-2 h-2 rounded-full bg-terracotta mt-4 flex-shrink-0" />
+            <span className="w-2 h-2 rounded-full bg-primary mt-4 flex-shrink-0" />
           )}
 
           {/* Text input */}
@@ -90,7 +90,7 @@ export function EditableList({
             placeholder={placeholder}
             rows={1}
             className="flex-1 px-3 py-2 rounded-lg border border-parchment-dark bg-white
-                       focus:outline-none focus:ring-2 focus:ring-terracotta focus:border-transparent
+                       focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                        resize-none overflow-hidden text-charcoal"
             style={{ minHeight: "40px" }}
             onInput={(e) => {
@@ -106,7 +106,7 @@ export function EditableList({
             type="button"
             onClick={() => handleRemoveItem(index)}
             disabled={items.length <= 1}
-            className="mt-2 p-2 text-charcoal-light hover:text-terracotta disabled:opacity-30
+            className="mt-2 p-2 text-charcoal-light hover:text-primary disabled:opacity-30
                        disabled:cursor-not-allowed transition-colors"
             title="Remove item"
           >
@@ -119,8 +119,8 @@ export function EditableList({
       <button
         type="button"
         onClick={handleAddItem}
-        className="flex items-center gap-2 px-4 py-2 text-sm text-terracotta hover:text-terracotta-dark
-                   hover:bg-terracotta/5 rounded-lg transition-colors"
+        className="flex items-center gap-2 px-4 py-2 text-sm text-primary hover:text-primary-dark
+                   hover:bg-primary/5 rounded-lg transition-colors"
       >
         <Plus className="h-4 w-4" />
         Add {numbered ? "step" : "item"}

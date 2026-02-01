@@ -43,7 +43,7 @@ export default function SignInPage() {
         <div className="bg-white rounded-2xl shadow-lg p-8">
           {/* Logo */}
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-terracotta rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
               <ChefHat className="h-8 w-8 text-white" />
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function SignInPage() {
                   placeholder="admin@example.com"
                   required
                   className="w-full pl-10 pr-4 py-3 border-2 border-parchment-dark rounded-xl
-                           focus:outline-none focus:border-terracotta transition-colors"
+                           focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function SignInPage() {
                   placeholder="Enter your password"
                   required
                   className="w-full pl-10 pr-4 py-3 border-2 border-parchment-dark rounded-xl
-                           focus:outline-none focus:border-terracotta transition-colors"
+                           focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-terracotta hover:bg-terracotta/90 text-white font-medium
+              className="w-full bg-primary hover:bg-primary/90 text-white font-medium
                        py-3 px-6 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Signing in..." : "Sign In"}
