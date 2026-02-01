@@ -126,7 +126,7 @@ async function parseRecipe(
 
   return {
     slug,
-    title: typeof recipe.title === "string" ? recipe.title : recipe.title.name,
+    title: String((recipe.title as { name?: string })?.name ?? recipe.title),
     description: recipe.description || "",
     youtubeUrl: recipe.youtubeUrl || "",
     youtubeId: recipe.youtubeId || "",
