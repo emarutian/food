@@ -108,7 +108,8 @@ async function parseRecipe(
   if (!recipe) return null;
 
   // Get the markdoc content - returns { node: { children: [...] } }
-  const contentData = await recipe.content();
+  const contentFn = recipe.content;
+  const contentData = typeof contentFn === "function" ? await contentFn() : contentFn;
   let nodes: unknown[] = [];
   if (contentData && typeof contentData === "object") {
     const c = contentData as Record<string, unknown>;
