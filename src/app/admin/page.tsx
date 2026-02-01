@@ -1,57 +1,105 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  Plus,
+  RefreshCw,
   TrendingUp,
   MessageCircle,
   ThumbsUp,
   Eye,
   Loader2,
-  Youtube,
   ChefHat,
   BarChart3,
+  ExternalLink,
+  Settings,
+  Youtube,
 } from "lucide-react";
-import { mockRecipes, mockComments } from "@/lib/mock-data";
 import Link from "next/link";
 
+interface Recipe {
+  slug: string;
+  title: string;
+  rating: number;
+  ratingCount: number;
+  isPublished: boolean;
+}
+
+interface SyncResult {
+  success: boolean;
+  message: string;
+  created: number;
+  createdRecipes?: string[];
+  errors?: string[];
+  remaining?: number;
+}
+
 export default function AdminDashboard() {
-  const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [isCreating, setIsCreating] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleCreateRecipe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!youtubeUrl) return;
+  // Fetch recipes on mount
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
 
-    setIsCreating(true);
-    // Simulate API call for Phase 1
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsCreating(false);
-    setShowSuccess(true);
-    setYoutubeUrl("");
-
-    // Reset success message after 3 seconds
-    setTimeout(() => setShowSuccess(false), 3000);
+  const fetchRecipes = async () => {
+    try {
+      const res = await fetch("/api/recipes");
+      if (res.ok) {
+        const data = await res.json();
+        setRecipes(data.recipes || []);
+      }
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Mock stats
+  const handleSyncVideos = async () => {
+    setIsSyncing(true);
+    setSyncResult(null);
+
+    try {
+      const res = await fetch("/api/cron/sync-videos", {
+        method: "POST",
+      });
+      const data = await res.json();
+      setSyncResult(data);
+
+      // Refresh recipes list if new ones were created
+      if (data.created > 0) {
+        await fetchRecipes();
+      }
+    } catch (error) {
+      setSyncResult({
+        success: false,
+        message: "Failed to sync videos",
+        created: 0,
+        errors: [String(error)],
+      });
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
+  // Calculate stats
   const stats = {
-    totalRecipes: mockRecipes.length,
-    totalRatings: mockRecipes.reduce((acc, r) => acc + r.ratingCount, 0),
-    totalComments: mockComments.length,
-    avgRating: Math.round(
-      mockRecipes.reduce((acc, r) => acc + r.rating, 0) / mockRecipes.length
-    ),
+    totalRecipes: recipes.length,
+    publishedRecipes: recipes.filter((r) => r.isPublished).length,
+    draftRecipes: recipes.filter((r) => !r.isPublished).length,
+    avgRating: recipes.length > 0
+      ? Math.round(recipes.reduce((acc, r) => acc + (r.rating || 0), 0) / recipes.length)
+      : 0,
   };
 
   // Top recipes by rating
-  const topRecipes = [...mockRecipes]
-    .sort((a, b) => b.rating - a.rating)
+  const topRecipes = [...recipes]
+    .filter((r) => r.isPublished)
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 5);
-
-  // Recent comments needing reply
-  const unrepliedComments = mockComments.filter((c) => !c.adminReply);
 
   return (
     <div className="min-h-screen py-8 bg-parchment">
@@ -63,12 +111,22 @@ export default function AdminDashboard() {
               Admin Dashboard
             </h1>
             <p className="text-charcoal-light mt-1">
-              Manage recipes and view analytics
+              Manage recipes and sync YouTube videos
             </p>
           </div>
-          <div className="flex items-center gap-2 text-sm text-charcoal-light">
-            <ChefHat className="h-5 w-5 text-terracotta" />
-            <span>Lan</span>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/keystatic"
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-parchment-dark rounded-lg hover:bg-parchment transition-colors text-charcoal"
+            >
+              <Settings className="h-4 w-4" />
+              Edit Recipes
+              <ExternalLink className="h-3 w-3" />
+            </Link>
+            <div className="flex items-center gap-2 text-sm text-charcoal-light">
+              <ChefHat className="h-5 w-5 text-terracotta" />
+              <span>Admin</span>
+            </div>
           </div>
         </div>
 
@@ -80,25 +138,25 @@ export default function AdminDashboard() {
               <BarChart3 className="h-5 w-5 text-terracotta" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
-              {stats.totalRecipes}
+              {isLoading ? "..." : stats.totalRecipes}
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-charcoal-light text-sm">Total Ratings</span>
+              <span className="text-charcoal-light text-sm">Published</span>
               <ThumbsUp className="h-5 w-5 text-sage" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
-              {stats.totalRatings}
+              {isLoading ? "..." : stats.publishedRecipes}
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-charcoal-light text-sm">Comments</span>
+              <span className="text-charcoal-light text-sm">Drafts</span>
               <MessageCircle className="h-5 w-5 text-honey-dark" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
-              {stats.totalComments}
+              {isLoading ? "..." : stats.draftRecipes}
             </p>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm">
@@ -107,131 +165,116 @@ export default function AdminDashboard() {
               <TrendingUp className="h-5 w-5 text-terracotta" />
             </div>
             <p className="font-heading text-3xl font-bold text-charcoal">
-              {stats.avgRating}%
+              {isLoading ? "..." : `${stats.avgRating}%`}
             </p>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Create Recipe Form */}
+          {/* Sync Videos Section */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
               <h2 className="font-heading text-xl font-semibold text-charcoal mb-6 flex items-center gap-2">
-                <Plus className="h-5 w-5 text-terracotta" />
-                Create New Recipe
+                <Youtube className="h-5 w-5 text-red-500" />
+                Sync YouTube Videos
               </h2>
 
-              {showSuccess && (
-                <div className="mb-6 p-4 bg-sage/10 border border-sage rounded-lg text-sage">
-                  Recipe created successfully! AI is generating the enhanced content...
+              {syncResult && (
+                <div
+                  className={`mb-6 p-4 rounded-lg ${
+                    syncResult.success
+                      ? "bg-sage/10 border border-sage text-sage"
+                      : "bg-red-50 border border-red-200 text-red-700"
+                  }`}
+                >
+                  <p className="font-medium">{syncResult.message}</p>
+                  {syncResult.created > 0 && (
+                    <p className="mt-2 text-sm">
+                      Created {syncResult.created} new recipe(s):
+                      <ul className="list-disc list-inside mt-1">
+                        {syncResult.createdRecipes?.map((title, i) => (
+                          <li key={i}>{title}</li>
+                        ))}
+                      </ul>
+                    </p>
+                  )}
+                  {syncResult.remaining && syncResult.remaining > 0 && (
+                    <p className="mt-2 text-sm">
+                      {syncResult.remaining} more videos to process. Click sync again.
+                    </p>
+                  )}
+                  {syncResult.errors && syncResult.errors.length > 0 && (
+                    <p className="mt-2 text-sm">
+                      Errors: {syncResult.errors.join(", ")}
+                    </p>
+                  )}
                 </div>
               )}
 
-              <form onSubmit={handleCreateRecipe}>
-                <div className="mb-4">
-                  <label
-                    htmlFor="youtube-url"
-                    className="block text-sm font-medium text-charcoal mb-2"
-                  >
-                    YouTube Video URL
-                  </label>
-                  <div className="relative">
-                    <Youtube className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-charcoal-light" />
-                    <input
-                      type="url"
-                      id="youtube-url"
-                      value={youtubeUrl}
-                      onChange={(e) => setYoutubeUrl(e.target.value)}
-                      placeholder="https://www.youtube.com/watch?v=..."
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-parchment-dark bg-parchment focus:outline-none focus:ring-2 focus:ring-terracotta focus:border-transparent transition-all"
-                      disabled={isCreating}
-                    />
-                  </div>
-                  <p className="mt-2 text-sm text-charcoal-light">
-                    Paste a YouTube cooking video URL. The system will extract metadata
-                    and generate an AI-enhanced recipe.
-                  </p>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isCreating || !youtubeUrl}
-                  className="w-full bg-terracotta hover:bg-terracotta-dark disabled:bg-terracotta-light text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
-                >
-                  {isCreating ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      Creating Recipe...
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="h-5 w-5" />
-                      Create Recipe
-                    </>
-                  )}
-                </button>
-              </form>
+              <button
+                onClick={handleSyncVideos}
+                disabled={isSyncing}
+                className="w-full bg-terracotta hover:bg-terracotta-dark disabled:bg-terracotta-light text-white px-6 py-4 rounded-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
+              >
+                {isSyncing ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    Syncing Videos...
+                  </>
+                ) : (
+                  <>
+                    <RefreshCw className="h-5 w-5" />
+                    Sync New Videos from YouTube
+                  </>
+                )}
+              </button>
 
               <div className="mt-6 p-4 bg-parchment-dark rounded-lg">
                 <h3 className="font-medium text-charcoal mb-2">How it works:</h3>
                 <ol className="text-sm text-charcoal-light space-y-1 list-decimal list-inside">
-                  <li>Paste a YouTube cooking video URL</li>
-                  <li>System extracts video metadata (title, description, thumbnail)</li>
-                  <li>Gemini AI generates enhanced recipe content</li>
-                  <li>Recipe page is created and published</li>
-                  <li>Email notification sent to all subscribers</li>
+                  <li>Fetches latest videos from your YouTube channel</li>
+                  <li>Identifies videos without recipes</li>
+                  <li>Gemini AI generates recipe content for each video</li>
+                  <li>Recipes are saved as drafts for your review</li>
+                  <li>Edit and publish via Keystatic CMS</li>
                 </ol>
+                <p className="mt-4 text-xs text-charcoal-light">
+                  This runs automatically every day at 6 AM UTC via Vercel Cron.
+                </p>
               </div>
             </div>
 
-            {/* Recent Comments */}
+            {/* Quick Actions */}
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="font-heading text-xl font-semibold text-charcoal flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5 text-honey-dark" />
-                  Comments Needing Reply
-                </h2>
-                <span className="text-sm text-charcoal-light">
-                  {unrepliedComments.length} pending
-                </span>
+              <h2 className="font-heading text-xl font-semibold text-charcoal mb-6">
+                Quick Actions
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                <Link
+                  href="/keystatic/recipes"
+                  className="flex items-center gap-3 p-4 bg-parchment rounded-lg hover:bg-parchment-dark transition-colors"
+                >
+                  <Settings className="h-6 w-6 text-terracotta" />
+                  <div>
+                    <p className="font-medium text-charcoal">Edit Recipes</p>
+                    <p className="text-xs text-charcoal-light">
+                      Open Keystatic CMS
+                    </p>
+                  </div>
+                </Link>
+                <Link
+                  href="/recipes"
+                  className="flex items-center gap-3 p-4 bg-parchment rounded-lg hover:bg-parchment-dark transition-colors"
+                >
+                  <Eye className="h-6 w-6 text-sage" />
+                  <div>
+                    <p className="font-medium text-charcoal">View Recipes</p>
+                    <p className="text-xs text-charcoal-light">
+                      See public recipe page
+                    </p>
+                  </div>
+                </Link>
               </div>
-
-              {unrepliedComments.length > 0 ? (
-                <div className="space-y-4">
-                  {unrepliedComments.map((comment) => {
-                    const recipe = mockRecipes.find((r) => r.id === comment.recipeId);
-                    return (
-                      <div
-                        key={comment.id}
-                        className="p-4 bg-parchment rounded-lg"
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-charcoal">
-                                {comment.user.name}
-                              </span>
-                              <span className="text-xs text-charcoal-light">
-                                on {recipe?.title}
-                              </span>
-                            </div>
-                            <p className="text-sm text-charcoal-light">
-                              {comment.content}
-                            </p>
-                          </div>
-                          <button className="text-sm text-terracotta hover:text-terracotta-dark font-medium whitespace-nowrap">
-                            Reply
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className="text-center text-charcoal-light py-4">
-                  All comments have been replied to!
-                </p>
-              )}
             </div>
           </div>
 
@@ -243,63 +286,91 @@ export default function AdminDashboard() {
                 <TrendingUp className="h-5 w-5 text-sage" />
                 Top Performing Recipes
               </h2>
-              <div className="space-y-4">
-                {topRecipes.map((recipe, index) => (
-                  <Link
-                    key={recipe.id}
-                    href={`/recipes/${recipe.slug}`}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-parchment transition-colors group"
-                  >
-                    <span className="w-6 h-6 rounded-full bg-parchment-dark flex items-center justify-center text-sm font-medium text-charcoal-light group-hover:bg-terracotta group-hover:text-white transition-colors">
-                      {index + 1}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-charcoal truncate">
-                        {recipe.title}
-                      </p>
-                      <div className="flex items-center gap-3 text-xs text-charcoal-light">
-                        <span className="flex items-center gap-1">
-                          <ThumbsUp className="h-3 w-3" />
-                          {recipe.rating}%
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Eye className="h-3 w-3" />
-                          {recipe.ratingCount}
-                        </span>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-charcoal-light" />
+                </div>
+              ) : topRecipes.length > 0 ? (
+                <div className="space-y-4">
+                  {topRecipes.map((recipe, index) => (
+                    <Link
+                      key={recipe.slug}
+                      href={`/recipes/${recipe.slug}`}
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-parchment transition-colors group"
+                    >
+                      <span className="w-6 h-6 rounded-full bg-parchment-dark flex items-center justify-center text-sm font-medium text-charcoal-light group-hover:bg-terracotta group-hover:text-white transition-colors">
+                        {index + 1}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-charcoal truncate">
+                          {recipe.title}
+                        </p>
+                        <div className="flex items-center gap-3 text-xs text-charcoal-light">
+                          <span className="flex items-center gap-1">
+                            <ThumbsUp className="h-3 w-3" />
+                            {recipe.rating || 0}%
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Eye className="h-3 w-3" />
+                            {recipe.ratingCount || 0}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-charcoal-light py-4">
+                  No published recipes yet
+                </p>
+              )}
             </div>
 
             {/* All Recipes */}
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-semibold text-charcoal mb-6">
-                All Recipes
-              </h2>
-              <div className="space-y-2">
-                {mockRecipes.map((recipe) => (
-                  <Link
-                    key={recipe.id}
-                    href={`/recipes/${recipe.slug}`}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-parchment transition-colors"
-                  >
-                    <span className="text-sm text-charcoal truncate flex-1">
-                      {recipe.title}
-                    </span>
-                    <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        recipe.isPublished
-                          ? "bg-sage/10 text-sage"
-                          : "bg-honey/10 text-honey-dark"
-                      }`}
-                    >
-                      {recipe.isPublished ? "Published" : "Draft"}
-                    </span>
-                  </Link>
-                ))}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="font-heading text-xl font-semibold text-charcoal">
+                  All Recipes
+                </h2>
+                <Link
+                  href="/keystatic/recipes"
+                  className="text-xs text-terracotta hover:text-terracotta-dark"
+                >
+                  Edit all →
+                </Link>
               </div>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-charcoal-light" />
+                </div>
+              ) : recipes.length > 0 ? (
+                <div className="space-y-2 max-h-96 overflow-y-auto">
+                  {recipes.map((recipe) => (
+                    <Link
+                      key={recipe.slug}
+                      href={`/keystatic/recipes/${recipe.slug}`}
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-parchment transition-colors"
+                    >
+                      <span className="text-sm text-charcoal truncate flex-1">
+                        {recipe.title}
+                      </span>
+                      <span
+                        className={`text-xs px-2 py-1 rounded ml-2 ${
+                          recipe.isPublished
+                            ? "bg-sage/10 text-sage"
+                            : "bg-honey/10 text-honey-dark"
+                        }`}
+                      >
+                        {recipe.isPublished ? "Published" : "Draft"}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center text-charcoal-light py-4">
+                  No recipes yet. Click &quot;Sync New Videos&quot; to get started!
+                </p>
+              )}
             </div>
           </div>
         </div>

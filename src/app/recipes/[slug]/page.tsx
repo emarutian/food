@@ -1,31 +1,26 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  Clock,
-  ChefHat,
-  ArrowLeft,
-  Lightbulb,
-  Utensils,
-  Youtube,
-} from "lucide-react";
-import { getRecipeBySlug, getCommentsForRecipe, mockRecipes } from "@/lib/mock-data";
+import { Clock, ChefHat, ArrowLeft, Youtube, Lightbulb, Utensils } from "lucide-react";
+import { getRecipeBySlug, getAllRecipes } from "@/lib/recipes";
 import { CommentSection } from "@/components/recipe/CommentSection";
-import { RatingButtons } from "@/components/recipe/RatingButtons";
 
 interface RecipePageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return mockRecipes.map((recipe) => ({
+  const recipes = await getAllRecipes();
+  return recipes.map((recipe) => ({
     slug: recipe.slug,
   }));
 }
 
-export async function generateMetadata({ params }: RecipePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: RecipePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const recipe = getRecipeBySlug(slug);
+  const recipe = await getRecipeBySlug(slug);
 
   if (!recipe) {
     return {
@@ -33,7 +28,8 @@ export async function generateMetadata({ params }: RecipePageProps): Promise<Met
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ihavefoodathome.com";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://ihavefoodathome.com";
 
   return {
     title: recipe.title,
@@ -56,13 +52,11 @@ export async function generateMetadata({ params }: RecipePageProps): Promise<Met
 
 export default async function RecipePage({ params }: RecipePageProps) {
   const { slug } = await params;
-  const recipe = getRecipeBySlug(slug);
+  const recipe = await getRecipeBySlug(slug);
 
   if (!recipe) {
     notFound();
   }
-
-  const comments = getCommentsForRecipe(recipe.id);
 
   const difficultyColors = {
     Easy: "bg-sage text-white",
@@ -87,18 +81,18 @@ export default async function RecipePage({ params }: RecipePageProps) {
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span
               className={`px-3 py-1 rounded-full text-sm font-medium ${
-                difficultyColors[recipe.enhancedRecipe.difficulty]
+                difficultyColors[recipe.difficulty]
               }`}
             >
-              {recipe.enhancedRecipe.difficulty}
+              {recipe.difficulty}
             </span>
             <span className="text-charcoal-light text-sm flex items-center gap-1">
               <Clock className="h-4 w-4" />
-              {recipe.enhancedRecipe.totalTime}
+              {recipe.totalTime}
             </span>
             <span className="text-charcoal-light text-sm flex items-center gap-1">
               <ChefHat className="h-4 w-4" />
-              {recipe.enhancedRecipe.servings}
+              {recipe.servings}
             </span>
           </div>
 
@@ -131,25 +125,6 @@ export default async function RecipePage({ params }: RecipePageProps) {
           </a>
         </div>
 
-        {/* Rating Section */}
-        <div className="bg-white rounded-xl p-6 shadow-sm mb-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-6">
-              <div className="text-center">
-                <p className="font-heading text-3xl font-bold text-sage">{recipe.rating}%</p>
-                <p className="text-sm text-charcoal-light">liked this</p>
-              </div>
-              <div className="h-12 w-px bg-parchment-dark" />
-              <div className="text-center">
-                <p className="font-heading text-2xl font-bold text-charcoal">{recipe.ratingCount}</p>
-                <p className="text-sm text-charcoal-light">ratings</p>
-              </div>
-            </div>
-
-            <RatingButtons />
-          </div>
-        </div>
-
         {/* Recipe Content */}
         <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {/* Ingredients - Sidebar */}
@@ -160,7 +135,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
                 Ingredients
               </h2>
               <ul className="space-y-3">
-                {recipe.enhancedRecipe.ingredients.map((ingredient, index) => (
+                {recipe.ingredients.map((ingredient, index) => (
                   <li
                     key={index}
                     className="flex items-start gap-3 text-charcoal"
@@ -181,7 +156,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
                 Instructions
               </h2>
               <ol className="space-y-6">
-                {recipe.enhancedRecipe.instructions.map((instruction, index) => (
+                {recipe.instructions.map((instruction, index) => (
                   <li key={index} className="flex gap-4">
                     <span className="flex-shrink-0 w-8 h-8 rounded-full bg-terracotta text-white font-semibold flex items-center justify-center">
                       {index + 1}
@@ -198,59 +173,69 @@ export default async function RecipePage({ params }: RecipePageProps) {
                 <div>
                   <p className="text-sm text-charcoal-light mb-1">Prep Time</p>
                   <p className="font-heading font-semibold text-charcoal">
-                    {recipe.enhancedRecipe.prepTime}
+                    {recipe.prepTime}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm text-charcoal-light mb-1">Cook Time</p>
                   <p className="font-heading font-semibold text-charcoal">
-                    {recipe.enhancedRecipe.cookTime}
+                    {recipe.cookTime}
                   </p>
                 </div>
                 <div>
                   <p className="text-sm text-charcoal-light mb-1">Total Time</p>
                   <p className="font-heading font-semibold text-charcoal">
-                    {recipe.enhancedRecipe.totalTime}
+                    {recipe.totalTime}
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Tips */}
-            <div className="bg-honey/10 rounded-xl p-6">
-              <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 flex items-center gap-2">
-                <Lightbulb className="h-5 w-5 text-honey-dark" />
-                Pro Tips
-              </h2>
-              <ul className="space-y-3">
-                {recipe.enhancedRecipe.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start gap-3 text-charcoal">
-                    <span className="text-honey-dark font-bold">•</span>
-                    {tip}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {recipe.tips.length > 0 && (
+              <div className="bg-honey/10 rounded-xl p-6">
+                <h2 className="font-heading text-xl font-semibold text-charcoal mb-4 flex items-center gap-2">
+                  <Lightbulb className="h-5 w-5 text-honey-dark" />
+                  Pro Tips
+                </h2>
+                <ul className="space-y-3">
+                  {recipe.tips.map((tip, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-charcoal"
+                    >
+                      <span className="text-honey-dark font-bold">•</span>
+                      {tip}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Variations */}
-            <div className="bg-sage/10 rounded-xl p-6">
-              <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
-                Variations
-              </h2>
-              <ul className="space-y-3">
-                {recipe.enhancedRecipe.variations.map((variation, index) => (
-                  <li key={index} className="flex items-start gap-3 text-charcoal">
-                    <span className="text-sage font-bold">•</span>
-                    {variation}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {recipe.variations.length > 0 && (
+              <div className="bg-sage/10 rounded-xl p-6">
+                <h2 className="font-heading text-xl font-semibold text-charcoal mb-4">
+                  Variations
+                </h2>
+                <ul className="space-y-3">
+                  {recipe.variations.map((variation, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-charcoal"
+                    >
+                      <span className="text-sage font-bold">•</span>
+                      {variation}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Comments Section */}
-        <CommentSection comments={comments} recipeId={recipe.id} />
+        <CommentSection comments={[]} recipeId={recipe.slug} />
       </div>
     </div>
   );

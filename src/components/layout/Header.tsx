@@ -41,10 +41,6 @@ export function Header() {
               <Search className="h-5 w-5" />
             </Link>
 
-            {/* Demo: Login Button (non-functional for Phase 1) */}
-            <button className="bg-terracotta hover:bg-terracotta-dark text-white px-4 py-2 rounded-lg transition-colors font-medium">
-              Sign In
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -79,9 +75,6 @@ export function Header() {
               >
                 About
               </Link>
-              <button className="bg-terracotta hover:bg-terracotta-dark text-white px-4 py-2 rounded-lg transition-colors font-medium w-full">
-                Sign In
-              </button>
             </div>
           </div>
         )}

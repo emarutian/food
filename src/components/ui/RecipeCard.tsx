@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, ChefHat, ThumbsUp } from "lucide-react";
+import { Clock, ChefHat } from "lucide-react";
 import { Recipe } from "@/types";
 
 interface RecipeCardProps {
@@ -47,20 +47,14 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
           </p>
 
           {/* Meta */}
-          <div className="mt-4 flex items-center justify-between text-sm text-charcoal-light">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1">
-                <Clock className="h-4 w-4" />
-                {recipe.enhancedRecipe.totalTime}
-              </span>
-              <span className="flex items-center gap-1">
-                <ChefHat className="h-4 w-4" />
-                {recipe.enhancedRecipe.servings}
-              </span>
-            </div>
-            <span className="flex items-center gap-1 text-sage">
-              <ThumbsUp className="h-4 w-4" />
-              {recipe.rating}%
+          <div className="mt-4 flex items-center gap-4 text-sm text-charcoal-light">
+            <span className="flex items-center gap-1">
+              <Clock className="h-4 w-4" />
+              {recipe.enhancedRecipe.totalTime}
+            </span>
+            <span className="flex items-center gap-1">
+              <ChefHat className="h-4 w-4" />
+              {recipe.enhancedRecipe.servings}
             </span>
           </div>
         </div>
