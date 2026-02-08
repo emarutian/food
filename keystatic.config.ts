@@ -1,20 +1,15 @@
 import { config, fields, collection } from "@keystatic/core";
 
-// Use GitHub storage only when deployed on Vercel with proper credentials
-const useGitHubStorage =
-  process.env.VERCEL === "1" &&
-  process.env.KEYSTATIC_GITHUB_CLIENT_ID &&
-  process.env.KEYSTATIC_GITHUB_CLIENT_SECRET;
-
 export default config({
-  storage: useGitHubStorage
-    ? {
-        kind: "github",
-        repo: "emarutian/food",
-      }
-    : {
-        kind: "local",
-      },
+  storage:
+    process.env.NODE_ENV === "production"
+      ? {
+          kind: "github",
+          repo: "emarutian/food",
+        }
+      : {
+          kind: "local",
+        },
   collections: {
     recipes: collection({
       label: "Recipes",
